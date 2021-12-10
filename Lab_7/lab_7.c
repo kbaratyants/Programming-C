@@ -1,12 +1,24 @@
 #include <stdio.h>
+#include <math.h>
 
 struct Rectangle {
-    int w;
-    int h;
+    double x1;
+    double y1;
+    double x2;
+    double y2;
+    double x3;
+    double y3;
+    double x4;
+    double y4;
 };
 
-int RectangleP(struct Rectangle Rect) {
-    return (Rect.w + Rect.h) * 2;
+double countLength(double x1, double y1, double x2, double y2) {
+    double x = fabs(x2 - x1), y = fabs(y2 - y1);
+    return sqrtf(x*x + y*y);
+}
+
+double RectangleP(struct Rectangle Rect) {
+    return (countLength(Rect.x1, Rect.y1, Rect.x2, Rect.y2) + countLength(Rect.x2, Rect.y2, Rect.x3, Rect.y3)) * 2;
 }
 
 struct MP3 {
@@ -34,8 +46,8 @@ int main()
 
     printf("Day: %d \n", Monday);
 
-    struct Rectangle Rect = {50, 40};
-    printf("Perimeter: %d \n", RectangleP(Rect));
+    struct Rectangle Rect = {0, 0, 0, 5, 6, 5, 6, 0};
+    printf("Perimeter: %f \n", RectangleP(Rect));
 
     union MP3U MP3State;
     printf("Insert: ");
